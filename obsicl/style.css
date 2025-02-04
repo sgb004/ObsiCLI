@@ -1,18 +1,23 @@
 obsi-cl {
 	display: block;
 	border: 1px solid #000;
+	font-size: 16px;
 
 	form {
 		position: relative;
-
-		input[type='text'] {
-			appearance: none;
+		
+		input{
+		  appearance: none;
 			border: none;
 			border-radius: 0;
 			background: transparent;
+      outline: none;
+      padding: 0 0 0 0;
+		}
+
+		input[type='text'] {
 			box-sizing: border-box;
 			width: 100%;
-			outline: none;
 		}
 
 		input[type='submit'] {
@@ -22,5 +27,12 @@ obsi-cl {
 			top: 0;
 			z-index: -1;
 		}
+	}
+	
+	pre, input[type='text']{
+	  font-family: monospace;
+	  font-size: 0.9rem;
+	  line-height: 17px;
+	  margin: 0;
 	}
 }

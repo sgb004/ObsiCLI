@@ -1,5 +1,6 @@
 class ObsiCL extends HTMLElement {
 	#output;
+	#inputElement;
 	#inCallbacks;
 
 	constructor() {
@@ -17,6 +18,7 @@ class ObsiCL extends HTMLElement {
 		`;
 
 		this.#output = this.querySelector('.output');
+		this.#inputElement = this.querySelector('form.input input[type="text"]');
 		this.#inCallbacks = {
 			resolve: () => {},
 			reject: () => {},
@@ -29,25 +31,25 @@ class ObsiCL extends HTMLElement {
 		if (form instanceof HTMLFormElement) {
 			form.addEventListener('submit', this.#handleInputSubmit.bind(this));
 		}
+		
+		this.addEventListener('click', this.#handleClick.bind(this));
 	}
 
 	#handleInputSubmit(event) {
 		event.preventDefault();
-
-		const input = event.currentTarget.querySelector('input[type="text"]');
-
-		if (input instanceof HTMLInputElement) {
-			this.ou(input.value);
-			this.#inCallbacks.resolve(input.value);
-			event.currentTarget.reset();
-		} else {
-			this.#inCallbacks.reject(input.value);
-		}
+		
+		this.ou(this.#inputElement.value);
+		this.#inCallbacks.resolve(this.#inputElement.value);
+		event.currentTarget.reset();
 
 		this.#inCallbacks = {
 			resolve: () => {},
 			reject: () => {},
 		};
+	}
+	
+	#handleClick(){
+	  this.#inputElement.focus();
 	}
 
 	ou(message) {

@@ -35,4 +35,12 @@ obsi-cl {
 	  line-height: 17px;
 	  margin: 0;
 	}
+	
+	pre.error{
+	  color: red;
+	}
+	
+	pre.warning{
+	  color: yellow;
+	}
 }

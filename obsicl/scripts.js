@@ -1,5 +1,5 @@
 class ObsiCL extends HTMLElement {
-	#output;
+	#outputElement;
 	#inputElement;
 	#inCallbacks;
 
@@ -17,7 +17,7 @@ class ObsiCL extends HTMLElement {
 			</div>
 		`;
 
-		this.#output = this.querySelector('.output');
+		this.#outputElement = this.querySelector('.output');
 		this.#inputElement = this.querySelector('form.input input[type="text"]');
 		this.#inCallbacks = {
 			resolve: () => {},
@@ -52,12 +52,23 @@ class ObsiCL extends HTMLElement {
 	  this.#inputElement.focus();
 	}
 
-	ou(message) {
+	ou(message, type = "") {
 		const line = document.createElement('pre');
+		if(type === "error" || type === "warning"){
+		  line.classList.add(type);
+		}
 		line.textContent = message;
 
-		this.#output.appendChild(line);
+		this.#outputElement.appendChild(line);
 	}
+	
+	ouError(message){
+	  this.ou(message, "error");
+	}
+
+  ouWarning(message){
+	  this.ou(message, "warning");
+  }
 
 	in() {
 		const cl = this;

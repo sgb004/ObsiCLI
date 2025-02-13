@@ -1,9 +1,15 @@
 obsi-cl {
+	--text-color: #fff;
+	--background-color: #000;
+	--border-color: var(--background-color);
+
 	display: flex;
-	border: 1px solid #000;
+	border: 1px solid var(--border-color);
 	font-size: 16px;
 	height: 40vh;
 	overflow: auto;
+	background-color: var(--background-color);
+	color: var(--text-color);
 
 	.screen {
 		display: flex;
@@ -33,6 +39,8 @@ obsi-cl {
 		input[type='text'] {
 			box-sizing: border-box;
 			width: 100%;
+			color: inherit;
+			caret-color: currentColor;
 		}
 
 		input[type='submit'] {

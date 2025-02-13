@@ -1,27 +1,33 @@
 obsi-cl {
 	display: flex;
-	flex-direction: column;
-	justify-content: end;
 	border: 1px solid #000;
 	font-size: 16px;
 	height: 40vh;
-	overflow: visible;
-	box-sizing: border-box;
-	
-	.output{
-	  margin-top: auto;
+	overflow: auto;
+
+	.screen {
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+		min-height: min-content;
+		width: 100%;
+		padding: 4px;
+	}
+
+	.output {
+		margin-top: auto;
 	}
 
 	form {
 		position: relative;
-		
-		input{
-		  appearance: none;
+
+		input {
+			appearance: none;
 			border: none;
 			border-radius: 0;
 			background: transparent;
-      outline: none;
-      padding: 0 0 0 0;
+			outline: none;
+			padding: 0 0 0 0;
 		}
 
 		input[type='text'] {
@@ -37,19 +43,20 @@ obsi-cl {
 			z-index: -1;
 		}
 	}
-	
-	pre, input[type='text']{
-	  font-family: monospace;
-	  font-size: 0.9rem;
-	  line-height: 17px;
-	  margin: 0;
+
+	pre,
+	input[type='text'] {
+		font-family: monospace;
+		font-size: 0.9rem;
+		line-height: 17px;
+		margin: 0;
 	}
-	
-	pre.error{
-	  color: red;
+
+	pre.error {
+		color: red;
 	}
-	
-	pre.warning{
-	  color: yellow;
+
+	pre.warning {
+		color: yellow;
 	}
 }

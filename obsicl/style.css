@@ -1,7 +1,16 @@
 obsi-cl {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
 	border: 1px solid #000;
 	font-size: 16px;
+	height: 40vh;
+	overflow: visible;
+	box-sizing: border-box;
+	
+	.output{
+	  margin-top: auto;
+	}
 
 	form {
 		position: relative;

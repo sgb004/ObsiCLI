@@ -31,13 +31,13 @@ class ObsiCL extends HTMLElement {
 		if (form instanceof HTMLFormElement) {
 			form.addEventListener('submit', this.#handleInputSubmit.bind(this));
 		}
-		
+
 		this.addEventListener('click', this.#handleClick.bind(this));
 	}
 
 	#handleInputSubmit(event) {
 		event.preventDefault();
-		
+
 		this.ou(this.#inputElement.value);
 		this.#inCallbacks.resolve(this.#inputElement.value);
 		event.currentTarget.reset();
@@ -47,30 +47,30 @@ class ObsiCL extends HTMLElement {
 			reject: () => {},
 		};
 	}
-	
-	#handleClick(){
-	  this.#inputElement.focus();
+
+	#handleClick() {
+		this.#inputElement.focus();
 	}
 
-	ou(message, type = "") {
+	ou(message, type = '') {
 		const line = document.createElement('pre');
-		if(type === "error" || type === "warning"){
-		  line.classList.add(type);
+		if (type === 'error' || type === 'warning') {
+			line.classList.add(type);
 		}
 		line.textContent = message;
 
 		this.#outputElement.appendChild(line);
-		
+
 		this.scrollTo(0, this.scrollHeight);
 	}
-	
-	ouError(message){
-	  this.ou(message, "error");
+
+	ouError(message) {
+		this.ou(message, 'error');
 	}
 
-  ouWarning(message){
-	  this.ou(message, "warning");
-  }
+	ouWarning(message) {
+		this.ou(message, 'warning');
+	}
 
 	in() {
 		const cl = this;

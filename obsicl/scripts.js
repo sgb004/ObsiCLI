@@ -60,6 +60,8 @@ class ObsiCL extends HTMLElement {
 		line.textContent = message;
 
 		this.#outputElement.appendChild(line);
+		
+		this.scrollTo(0, this.scrollHeight);
 	}
 	
 	ouError(message){

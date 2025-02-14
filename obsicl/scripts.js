@@ -54,7 +54,9 @@ class ObsiCL extends HTMLElement {
 
 	ou(message, type = '') {
 		const line = document.createElement('pre');
-		if (type === 'error' || type === 'warning') {
+		const types = ['error', 'warning', 'success'];
+
+		if (types.includes(type)) {
 			line.classList.add(type);
 		}
 		line.textContent = message;
@@ -70,6 +72,10 @@ class ObsiCL extends HTMLElement {
 
 	ouWarning(message) {
 		this.ou(message, 'warning');
+	}
+
+	ouSuccess(message) {
+		this.ou(message, 'success');
 	}
 
 	in() {

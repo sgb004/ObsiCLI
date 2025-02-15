@@ -49,7 +49,22 @@ class ObsiCL extends HTMLElement {
 	}
 
 	#handleClick() {
-		this.#inputElement.focus();
+		requestAnimationFrame(() => {
+			const selection = window.getSelection();
+			let textSelected = false;
+
+			if (!selection.isCollapsed) {
+				const parent = selection.anchorNode.parentNode.closest('obsi-cl');
+
+				if (parent === this) {
+					textSelected = true;
+				}
+			}
+
+			if (!textSelected) {
+				this.#inputElement.focus();
+			}
+		});
 	}
 
 	ou(message, type = '') {

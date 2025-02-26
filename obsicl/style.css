@@ -67,4 +67,8 @@ obsi-cl {
 	pre.warning {
 		color: yellow;
 	}
+
+	pre.success {
+		color: greenyellow;
+	}
 }

@@ -1,0 +1,38 @@
+{
+	"name": "obsi-cli",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"vite": "^6.2.0"
+	},
+	"description": "A command line simulator for JavaScript programs as programming challenges. This simulator is intended as a means to print output and input.",
+	"main": "vite.config.js",
+	"dependencies": {
+		"esbuild": "^0.25.0",
+		"nanoid": "^3.3.8",
+		"picocolors": "^1.1.1",
+		"postcss": "^8.5.3",
+		"rollup": "^4.34.8",
+		"source-map-js": "^1.2.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/sgb004/ObsiCLI.git"
+	},
+	"keywords": [
+		"cli",
+		"javascript"
+	],
+	"author": "sgb004",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sgb004/ObsiCLI/issues"
+	},
+	"homepage": "https://github.com/sgb004/ObsiCLI#readme"
+}

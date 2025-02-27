@@ -1,3 +1,10 @@
+/**
+ * @name ObsiCLI
+ * @description A command line simulator for JavaScript programs as programming challenges. This simulator is intended as a means to print output and input.
+ * @author sgb004
+ * @version 1.0.0
+ */
+
 class ObsiCLI extends HTMLElement {
 	#outputElement;
 	#inputElement;

@@ -1,4 +1,4 @@
-class ObsiCL extends HTMLElement {
+class ObsiCLI extends HTMLElement {
 	#outputElement;
 	#inputElement;
 	#inCallbacks;
@@ -131,4 +131,4 @@ class ObsiCL extends HTMLElement {
 	}
 }
 
-customElements.define('obsi-cl', ObsiCL);
+customElements.define('obsi-cli', ObsiCLI);

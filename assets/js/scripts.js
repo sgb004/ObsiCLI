@@ -85,6 +85,8 @@
 
 			terminal.ouSuccess(`\n${accumulator}\n`);
 		} while (mustContinue);
+
+		terminal.close();
 	}
 
 	async function handleReady() {

@@ -35,6 +35,11 @@ class ObsiCL extends HTMLElement {
 		this.addEventListener('click', this.#handleClick.bind(this));
 	}
 
+	#dispatchEvent(name) {
+		const event = new CustomEvent(name);
+		this.dispatchEvent(event);
+	}
+
 	#handleInputSubmit(event) {
 		event.preventDefault();
 
@@ -101,6 +106,28 @@ class ObsiCL extends HTMLElement {
 				reject,
 			};
 		});
+	}
+
+	open(message) {
+		const msg =
+			message == undefined || message == null ? '\nObsiCLI was opened correctly.' : message;
+
+		this.ou(msg);
+		this.#inputElement.removeAttribute('disabled');
+		this.#inputElement.focus();
+
+		this.#dispatchEvent('opened');
+	}
+
+	close(message) {
+		const msg =
+			message == undefined || message == null ? '\nObsiCLI was closed correctly.' : message;
+
+		this.ou(msg);
+		this.#inputElement.setAttribute('disabled', 'disabled');
+		this.#inputElement.value = '';
+
+		this.#dispatchEvent('closed');
 	}
 }
 

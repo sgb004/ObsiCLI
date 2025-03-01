@@ -68,7 +68,7 @@ class ObsiCLI extends HTMLElement {
 			let textSelected = false;
 
 			if (!selection.isCollapsed) {
-				const parent = selection.anchorNode.parentNode.closest('obsi-cl');
+				const parent = selection.anchorNode.parentNode.closest('obsi-cli');
 
 				if (parent === this) {
 					textSelected = true;

@@ -12,7 +12,9 @@ class ObsiCLI extends HTMLElement {
 
 	constructor() {
 		super();
+	}
 
+	connectedCallback() {
 		this.innerHTML = `
 			<div class="screen">
 				<div class="output">

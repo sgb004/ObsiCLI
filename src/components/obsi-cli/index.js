@@ -19,7 +19,7 @@ class ObsiCLI extends HTMLElement {
 			<div class="screen">
 				<div class="output">
 				</div>
-				<form class="input">
+				<form class="input" action="#">
 					<input type="text" value="" />
 					<input type="submit" value="" />
 				</form>

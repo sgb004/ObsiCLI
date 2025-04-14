@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/gh/sgb004/ObsiCLI/dist/obsi-cli.css"
+		/>
+
+		<!-- <script src="./final.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/gh/sgb004/ObsiCLI/dist/obsi-cli.web.js"></script>
+	</head>
+	<body>
+		<obsi-cli></obsi-cli>
+
+		<script>
+			async function handleReady() {
+				const terminal = document.querySelector('obsi-cli');
+				let input;
+
+				terminal.addEventListener('ready', () => {
+					console.log('LA TERMINAL ESTA LISTA');
+				});
+
+				do {
+					terminal.ou('\nWrite something:');
+
+					input = await terminal.in();
+
+					terminal.ou(`\nYou wrote: "${input}"`);
+				} while (input !== 'exit');
+
+				terminal.close('\nThe program has ended.');
+			}
+
+			document.addEventListener('DOMContentLoaded', handleReady);
+		</script>
+	</body>
+</html>

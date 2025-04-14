@@ -33,6 +33,10 @@ class ObsiCLI extends HTMLElement {
 			reject: () => {},
 		};
 		this.#addListeners();
+
+		requestAnimationFrame(() => {
+			this.dispatchEvent(new CustomEvent('ready'));
+		});
 	}
 
 	#addListeners() {

@@ -26,6 +26,7 @@ obsi-cli {
 
 	form {
 		position: relative;
+		margin: 0;
 
 		input {
 			appearance: none;

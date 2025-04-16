@@ -63,7 +63,7 @@ obsi-cli {
 	}
 
 	pre {
-		white-space: normal;
+		white-space: break-spaces;
 	}
 
 	pre.error {

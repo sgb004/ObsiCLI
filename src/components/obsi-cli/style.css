@@ -10,6 +10,7 @@ obsi-cli {
 	overflow: auto;
 	background-color: var(--background-color);
 	color: var(--text-color);
+	box-sizing: border-box;
 
 	.screen {
 		display: flex;
@@ -61,6 +62,10 @@ obsi-cli {
 		margin: 0;
 	}
 
+	pre {
+		white-space: normal;
+	}
+
 	pre.error {
 		color: red;
 	}
@@ -71,5 +76,13 @@ obsi-cli {
 
 	pre.success {
 		color: greenyellow;
+	}
+
+	pre.info {
+		color: cyan;
+	}
+
+	pre.debug {
+		color: blueviolet;
 	}
 }

@@ -1,5 +1,13 @@
 obsi-cli {
+	--font-family: monospace;
+	--font-size: 0.9rem;
+	--line-height: 17px;
 	--text-color: #fff;
+	--text-color-error: red;
+	--text-color-warning: yellow;
+	--text-color-success: greenyellow;
+	--text-color-info: cyan;
+	--text-color-debug: blueviolet;
 	--background-color: #000;
 	--border-color: var(--background-color);
 
@@ -56,9 +64,9 @@ obsi-cli {
 
 	pre,
 	input[type='text'] {
-		font-family: monospace;
-		font-size: 0.9rem;
-		line-height: 17px;
+		font-family: var(--font-family);
+		font-size: var(--font-size);
+		line-height: var(--line-height);
 		margin: 0;
 	}
 
@@ -67,22 +75,22 @@ obsi-cli {
 	}
 
 	pre.error {
-		color: red;
+		color: var(--text-color-error);
 	}
 
 	pre.warning {
-		color: yellow;
+		color: var(--text-color-warning);
 	}
 
 	pre.success {
-		color: greenyellow;
+		color: var(--text-color-success);
 	}
 
 	pre.info {
-		color: cyan;
+		color: var(--text-color-info);
 	}
 
 	pre.debug {
-		color: blueviolet;
+		color: var(--text-color-debug);
 	}
 }

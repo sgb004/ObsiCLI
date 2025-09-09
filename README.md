@@ -29,7 +29,7 @@ let input;
 
 terminal.ou('Write something:');
 
-input = await terminal.in();
+input = await terminal.in(); //or await terminal.in("\nWrite something:"); if you want to add a prompt
 
 terminal.ou(`You wrote: "${input}"`);
 ```

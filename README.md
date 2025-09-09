@@ -45,9 +45,7 @@ terminal.ou(`You wrote: "${input}"`);
 		let input;
 
 		do {
-			terminal.ou('\nWrite something:');
-
-			input = await terminal.in();
+			input = await terminal.in('\nWrite something:');
 
 			terminal.ou(`\nYou wrote: "${input}"`);
 		} while (input !== 'exit');

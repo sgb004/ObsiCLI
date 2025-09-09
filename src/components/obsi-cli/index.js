@@ -119,8 +119,11 @@ class ObsiCLI extends HTMLElement {
 		this.ou(message, 'debug');
 	}
 
-	in() {
-		const cl = this;
+	in(message) {
+		if (message) {
+			this.ou(message);
+		}
+
 		return new Promise((resolve, reject) => {
 			this.#inCallbacks = {
 				resolve,

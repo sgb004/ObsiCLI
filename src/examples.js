@@ -17,9 +17,7 @@
 		terminal.ou('Welcome.\nThis program is a calculator.\n');
 
 		do {
-			terminal.ou('\nEnter a number:');
-
-			terminalIn = await terminal.in();
+			terminalIn = await terminal.in('\nEnter a number:');
 			accumulator = parseFloat(terminalIn);
 
 			if (accumulator >= -200000 && accumulator <= 200000) {

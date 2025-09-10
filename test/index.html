@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Terminal ObsiCLI</title>
 
 		<link
 			rel="stylesheet"
@@ -22,15 +22,23 @@
 				let input;
 
 				terminal.addEventListener('ready', () => {
-					console.log('LA TERMINAL ESTA LISTA');
+					console.log('The terminal is ready.');
+				});
+
+				terminal.addEventListener('opened', () => {
+					console.log('The terminal is opened.');
+				});
+
+				terminal.addEventListener('closed', () => {
+					console.log('The terminal is closed.');
 				});
 
 				do {
-					terminal.ou('\nWrite something:');
+					terminal.out('\nWrite something:');
 
 					input = await terminal.in();
 
-					terminal.ou(`\nYou wrote: "${input}"`);
+					terminal.out(`\nYou wrote: "${input}"`);
 				} while (input !== 'exit');
 
 				terminal.close('\nThe program has ended.');

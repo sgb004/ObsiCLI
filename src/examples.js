@@ -14,7 +14,19 @@
 		let operator = '';
 		let terminalIn;
 
-		terminal.ou('Welcome.\nThis program is a calculator.\n');
+		terminal.addEventListener('ready', () => {
+			console.log('The terminal is ready.');
+		});
+
+		terminal.addEventListener('opened', () => {
+			console.log('The terminal is opened.');
+		});
+
+		terminal.addEventListener('closed', () => {
+			console.log('The terminal is closed.');
+		});
+
+		terminal.out('Welcome.\nThis program is a calculator.\n');
 
 		do {
 			terminalIn = await terminal.in('\nEnter a number:');
@@ -23,14 +35,14 @@
 			if (accumulator >= -200000 && accumulator <= 200000) {
 				mustContinue = true;
 			} else {
-				terminal.ouError('The number must be in a range of -200000 and 200000\n');
+				terminal.outWarning('The number must be in a range of -200000 and 200000\n');
 				mustContinue = false;
 			}
 		} while (!mustContinue);
 
 		do {
 			do {
-				terminal.ou('\nEnter an operator:');
+				terminal.out('\nEnter an operator:');
 				operator = await terminal.in();
 
 				if (
@@ -40,7 +52,7 @@
 					operator !== '/' &&
 					operator !== '='
 				) {
-					terminal.ouError('The operator must be + - * / =\n');
+					terminal.outWarn('The operator must be + - * / =\n');
 					mustContinue = false;
 				} else {
 					mustContinue = true;
@@ -51,7 +63,7 @@
 				mustContinue = false;
 			} else {
 				do {
-					terminal.ou('\nEnter a number:');
+					terminal.out('\nEnter a number:');
 
 					terminalIn = await terminal.in();
 					number = parseFloat(terminalIn);
@@ -59,7 +71,7 @@
 					if (number >= -200000 && number <= 200000) {
 						mustContinue = true;
 					} else {
-						terminal.ouError('The number must be in a range of -200000 and 200000\n');
+						terminal.outWarn('The number must be in a range of -200000 and 200000\n');
 						mustContinue = false;
 					}
 				} while (!mustContinue);
@@ -73,7 +85,7 @@
 				accumulator = accumulator * number;
 			} else if (operator === '/') {
 				if (number === 0) {
-					terminal.ouError('Cannot be divided by zero\n');
+					terminal.outError('Cannot be divided by zero\n');
 					accumulator = '';
 					mustContinue = false;
 				} else {
@@ -81,7 +93,7 @@
 				}
 			}
 
-			terminal.ouSuccess(`\n${accumulator}\n`);
+			terminal.outSuccess(`\n${accumulator}\n`);
 		} while (mustContinue);
 
 		terminal.close();

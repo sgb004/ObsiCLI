@@ -2,7 +2,7 @@
  * @name ObsiCLI
  * @description A command line simulator for JavaScript programs as programming challenges. This simulator is intended as a means to print output and input.
  * @author sgb004
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 class ObsiCLI extends HTMLElement {
@@ -56,7 +56,7 @@ class ObsiCLI extends HTMLElement {
 	#handleInputSubmit(event) {
 		event.preventDefault();
 
-		this.ou(this.#inputElement.value);
+		this.out(this.#inputElement.value);
 		this.#inCallbacks.resolve(this.#inputElement.value);
 		event.currentTarget.reset();
 
@@ -85,7 +85,7 @@ class ObsiCLI extends HTMLElement {
 		});
 	}
 
-	ou(message, type = '') {
+	out(message, type = '') {
 		const line = document.createElement('pre');
 		const types = ['error', 'warning', 'warn', 'success', 'info', 'debug'];
 
@@ -99,33 +99,33 @@ class ObsiCLI extends HTMLElement {
 		this.scrollTo(0, this.scrollHeight);
 	}
 
-	ouError(message) {
-		this.ou(message, 'error');
+	outError(message) {
+		this.out(message, 'error');
 	}
 
-	ouWarning(message) {
-		this.ou(message, 'warning');
+	outWarning(message) {
+		this.out(message, 'warning');
 	}
 
-	ouWarn(message) {
-		this.ouWarning(message);
+	outWarn(message) {
+		this.outWarning(message);
 	}
 
-	ouSuccess(message) {
-		this.ou(message, 'success');
+	outSuccess(message) {
+		this.out(message, 'success');
 	}
 
-	ouInfo(message) {
-		this.ou(message, 'info');
+	outInfo(message) {
+		this.out(message, 'info');
 	}
 
-	ouDebug(message) {
-		this.ou(message, 'debug');
+	outDebug(message) {
+		this.out(message, 'debug');
 	}
 
 	in(message) {
 		if (message) {
-			this.ou(message);
+			this.out(message);
 		}
 
 		return new Promise((resolve, reject) => {
@@ -140,7 +140,7 @@ class ObsiCLI extends HTMLElement {
 		const msg =
 			message == undefined || message == null ? '\nObsiCLI was opened correctly.' : message;
 
-		this.ou(msg);
+		this.out(msg);
 		this.#inputElement.removeAttribute('disabled');
 		this.#inputElement.focus();
 
@@ -151,7 +151,7 @@ class ObsiCLI extends HTMLElement {
 		const msg =
 			message == undefined || message == null ? '\nObsiCLI was closed correctly.' : message;
 
-		this.ou(msg);
+		this.out(msg);
 		this.#inputElement.setAttribute('disabled', 'disabled');
 		this.#inputElement.value = '';
 

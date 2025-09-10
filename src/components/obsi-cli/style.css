@@ -78,7 +78,8 @@ obsi-cli {
 		color: var(--text-color-error);
 	}
 
-	pre.warning {
+	pre.warning,
+	pre.warn {
 		color: var(--text-color-warning);
 	}
 

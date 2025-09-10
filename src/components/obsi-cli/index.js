@@ -87,7 +87,7 @@ class ObsiCLI extends HTMLElement {
 
 	ou(message, type = '') {
 		const line = document.createElement('pre');
-		const types = ['error', 'warning', 'success', 'info', 'debug'];
+		const types = ['error', 'warning', 'warn', 'success', 'info', 'debug'];
 
 		if (types.includes(type)) {
 			line.classList.add(type);
@@ -105,6 +105,10 @@ class ObsiCLI extends HTMLElement {
 
 	ouWarning(message) {
 		this.ou(message, 'warning');
+	}
+
+	ouWarn(message) {
+		this.ouWarning(message);
 	}
 
 	ouSuccess(message) {

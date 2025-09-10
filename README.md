@@ -1,5 +1,8 @@
 # ObsiCLI
 
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/sgb004/ObsiCLI)
+[![Author](https://img.shields.io/badge/author-sgb004-green.svg)](https://sgb004.com)
+
 A command line simulator for JavaScript programs as programming challenges. This simulator is intended as a means to print output and input.
 
 ## Usage
@@ -57,10 +60,33 @@ terminal.ou(`You wrote: "${input}"`);
 </script>
 ```
 
-## Author
+There are some variations of the method `out` that you can use to print different types of messages:
 
-sgb004
+```javascript
+terminal.outError('This is an error message.');
+terminal.outWarning('This is a warning message.');
+terminal.outWarn('This is a warning message.');
+terminal.outSuccess('This is a success message.');
+terminal.outInfo('This is an info message.');
+terminal.outDebug('This is a debug message.');
+```
+
+## Events
+
+The component has the next events:
+
+-   `ready`: This event is dispatched when the component is ready.
+-   `opened`: This event is dispatched when the component is opened. This event is dispatched after the `closed` event when the component is open again.
+-   `closed`: This event is dispatched when the component is closed.
+
+You can listen to these events by adding an event listener to the component:
+
+```javascript
+terminal.addEventListener('ready', () => {
+	console.log('The terminal is ready.');
+});
+```
 
 ## License
 
-MIT License
+[MIT](LICENSE)

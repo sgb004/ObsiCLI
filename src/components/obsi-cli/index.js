@@ -92,7 +92,7 @@ class ObsiCLI extends HTMLElement {
 		if (types.includes(type)) {
 			line.classList.add(type);
 		}
-		line.textContent = message;
+		line.textContent = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
 
 		this.#outputElement.appendChild(line);
 

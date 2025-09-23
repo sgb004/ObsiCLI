@@ -99,8 +99,16 @@
 		terminal.close();
 	}
 
+	function exampleObject() {
+		const terminal = document.getElementById('terminal-test-object');
+
+		terminal.out('This terminal will output an object:');
+		terminal.out({ message: 'Object message', type: 'success' });
+	}
+
 	async function handleReady() {
 		exampleCalculator();
+		exampleObject();
 	}
 
 	document.addEventListener('DOMContentLoaded', handleReady);

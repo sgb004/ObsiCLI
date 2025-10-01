@@ -106,9 +106,21 @@
 		terminal.out({ message: 'Object message', type: 'success' });
 	}
 
+	function exampleFreeText() {
+		const terminal = document.getElementById('terminal-test-free-text');
+		const button = document.getElementById('clear-terminal-test-free-text');
+
+		terminal.out('Write something:');
+
+		button.addEventListener('click', () => {
+			terminal.clear();
+		});
+	}
+
 	async function handleReady() {
 		exampleCalculator();
 		exampleObject();
+		exampleFreeText();
 	}
 
 	document.addEventListener('DOMContentLoaded', handleReady);

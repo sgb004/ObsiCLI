@@ -157,6 +157,12 @@ class ObsiCLI extends HTMLElement {
 
 		this.#dispatchEvent('closed');
 	}
+
+	clear() {
+		this.#outputElement.innerHTML = '';
+		this.#inputElement.value = '';
+		this.#inputElement.focus();
+	}
 }
 
 customElements.define('obsi-cli', ObsiCLI);

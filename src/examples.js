@@ -112,6 +112,10 @@
 
 		terminal.out('Write something:');
 
+		terminal.addEventListener('input', (event) => {
+			console.log(event.detail);
+		});
+
 		button.addEventListener('click', () => {
 			terminal.clear();
 		});

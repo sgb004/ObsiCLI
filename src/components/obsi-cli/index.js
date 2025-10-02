@@ -46,10 +46,11 @@ class ObsiCLI extends HTMLElement {
 		}
 
 		this.addEventListener('click', this.#handleClick.bind(this));
+		this.#inputElement.addEventListener('input', (event) => event.stopPropagation());
 	}
 
-	#dispatchEvent(name) {
-		const event = new CustomEvent(name);
+	#dispatchEvent(name, detail = {}) {
+		const event = new CustomEvent(name, { detail });
 		this.dispatchEvent(event);
 	}
 
@@ -58,6 +59,7 @@ class ObsiCLI extends HTMLElement {
 
 		this.out(this.#inputElement.value);
 		this.#inCallbacks.resolve(this.#inputElement.value);
+		this.#dispatchEvent('input', this.#inputElement.value);
 		event.currentTarget.reset();
 
 		this.#inCallbacks = {

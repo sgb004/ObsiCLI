@@ -33,37 +33,23 @@ obsi-cli {
 		margin-top: auto;
 	}
 
-	form {
-		position: relative;
-		margin: 0;
-
-		input {
-			appearance: none;
-			border: none;
-			border-radius: 0;
-			background: transparent;
-			outline: none;
-			padding: 0 0 0 0;
-		}
-
-		input[type='text'] {
-			box-sizing: border-box;
-			width: 100%;
-			color: inherit;
-			caret-color: currentColor;
-		}
-
-		input[type='submit'] {
-			opacity: 0;
-			position: absolute;
-			left: 0;
-			top: 0;
-			z-index: -1;
-		}
+	.input {
+		display: block;
+		appearance: none;
+		border: none;
+		border-radius: 0;
+		background: transparent;
+		outline: none;
+		padding: 0 0 0 0;
+		box-sizing: border-box;
+		width: 100%;
+		color: inherit;
+		caret-color: currentColor;
+		resize: none;
 	}
 
-	pre,
-	input[type='text'] {
+	.output pre,
+	.input {
 		font-family: var(--font-family);
 		font-size: var(--font-size);
 		line-height: var(--line-height);

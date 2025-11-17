@@ -19,20 +19,19 @@ class ObsiCLI extends HTMLElement {
 			<div class="screen">
 				<div class="output">
 				</div>
-				<form class="input" action="#">
-					<input type="text" value="" />
-					<input type="submit" value="" />
-				</form>
+				<textarea class="input" rows="1"></textarea>
 			</div>
 		`;
 
 		this.#outputElement = this.querySelector('.output');
-		this.#inputElement = this.querySelector('form.input input[type="text"]');
 		this.#inCallbacks = {
 			resolve: () => {},
 			reject: () => {},
 		};
+		this.#inputElement = this.querySelector('.input');
 		this.#addListeners();
+
+		console.log(this.#inputElement);
 
 		requestAnimationFrame(() => {
 			this.dispatchEvent(new CustomEvent('ready'));
@@ -40,32 +39,16 @@ class ObsiCLI extends HTMLElement {
 	}
 
 	#addListeners() {
-		const form = this.querySelector('.input');
-		if (form instanceof HTMLFormElement) {
-			form.addEventListener('submit', this.#handleInputSubmit.bind(this));
-		}
-
 		this.addEventListener('click', this.#handleClick.bind(this));
-		this.#inputElement.addEventListener('input', (event) => event.stopPropagation());
+
+		this.#inputElement.addEventListener('keydown', this.#handleInputKeydown.bind(this));
+		this.#inputElement.addEventListener('paste', this.#handleInputPaste.bind(this));
+		this.#inputElement.addEventListener('input', this.#handleInputInput.bind(this));
 	}
 
 	#dispatchEvent(name, detail = {}) {
 		const event = new CustomEvent(name, { detail });
 		this.dispatchEvent(event);
-	}
-
-	#handleInputSubmit(event) {
-		event.preventDefault();
-
-		this.out(this.#inputElement.value);
-		this.#inCallbacks.resolve(this.#inputElement.value);
-		this.#dispatchEvent('input', this.#inputElement.value);
-		event.currentTarget.reset();
-
-		this.#inCallbacks = {
-			resolve: () => {},
-			reject: () => {},
-		};
 	}
 
 	#handleClick() {
@@ -85,6 +68,43 @@ class ObsiCLI extends HTMLElement {
 				this.#inputElement.focus();
 			}
 		});
+	}
+
+	#handleInputKeydown(event) {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+
+			this.#enterInput();
+		}
+	}
+
+	#handleInputPaste(event) {
+		const text = (event.clipboardData || window.clipboardData).getData('text');
+		this.#resizeTextarea(text);
+	}
+
+	#handleInputInput(event) {
+		this.#resizeTextarea(event.target.value);
+	}
+
+	#resizeTextarea(value) {
+		const breakLines = (value.match(/\r\n|\r|\n/g) || []).length;
+		this.#inputElement.setAttribute('rows', breakLines + 1);
+	}
+
+	#enterInput() {
+		const inputValue = this.#inputElement.value;
+
+		this.out(inputValue);
+		this.#inCallbacks.resolve(inputValue);
+		this.#dispatchEvent('input', inputValue);
+		this.#inputElement.value = '';
+		this.#inputElement.setAttribute('rows', 1);
+
+		this.#inCallbacks = {
+			resolve: () => {},
+			reject: () => {},
+		};
 	}
 
 	out(message, type = '') {

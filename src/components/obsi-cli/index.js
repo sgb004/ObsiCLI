@@ -8,6 +8,7 @@
 class ObsiCLI extends HTMLElement {
 	#outputElement;
 	#inputElement;
+	#inputQueue = [];
 	#inCallbacks;
 
 	constructor() {
@@ -30,8 +31,6 @@ class ObsiCLI extends HTMLElement {
 		};
 		this.#inputElement = this.querySelector('.input');
 		this.#addListeners();
-
-		console.log(this.#inputElement);
 
 		requestAnimationFrame(() => {
 			this.dispatchEvent(new CustomEvent('ready'));
@@ -92,12 +91,24 @@ class ObsiCLI extends HTMLElement {
 		this.#inputElement.setAttribute('rows', breakLines + 1);
 	}
 
-	#enterInput() {
-		const inputValue = this.#inputElement.value;
+	#addInputsToInputQueue(input) {
+		const inputs = `${input}`.split(/\r?\n|\r/);
 
-		this.out(inputValue);
-		this.#inCallbacks.resolve(inputValue);
-		this.#dispatchEvent('input', inputValue);
+		for (const message of inputs) {
+			this.#inputQueue.push(message);
+		}
+	}
+
+	#enterInput() {
+		const input = this.#inputElement.value;
+
+		this.#addInputsToInputQueue(input);
+
+		const firstInput = this.#inputQueue.shift();
+
+		this.#multiout(input);
+		this.#inCallbacks.resolve(firstInput);
+		this.#dispatchEvent('input', firstInput);
 		this.#inputElement.value = '';
 		this.#inputElement.setAttribute('rows', 1);
 
@@ -107,14 +118,45 @@ class ObsiCLI extends HTMLElement {
 		};
 	}
 
-	out(message, type = '') {
+	#multiout(input) {
+		const inputs = `${input}`.split(/\r?\n|\r/);
+
+		this.out(inputs.shift());
+		for (const message of inputs) {
+			const line = this.#addLine(message, '', 'tmp');
+			this.#outputElement.appendChild(line);
+		}
+	}
+
+	#addLine(message, type = '', className = '') {
 		const line = document.createElement('pre');
 		const types = ['error', 'warning', 'warn', 'success', 'info', 'debug'];
 
 		if (types.includes(type)) {
 			line.classList.add(type);
 		}
+
+		if (className) {
+			line.classList.add(className);
+		}
+
 		line.textContent = typeof message === 'object' ? JSON.stringify(message, null, 2) : message;
+
+		return line;
+	}
+
+	#removeFirstTmpLine() {
+		const tmp = this.#outputElement.querySelector('.tmp');
+		tmp.remove();
+	}
+
+	#moveTmpLinesToBottom() {
+		const tmps = this.#outputElement.querySelectorAll('.tmp');
+		tmps.forEach((tmp) => this.#outputElement.appendChild(tmp));
+	}
+
+	out(message, type = '') {
+		const line = this.#addLine(message, type);
 
 		this.#outputElement.appendChild(line);
 
@@ -151,10 +193,19 @@ class ObsiCLI extends HTMLElement {
 		}
 
 		return new Promise((resolve, reject) => {
-			this.#inCallbacks = {
-				resolve,
-				reject,
-			};
+			if (this.#inputQueue.length == 0) {
+				this.#inCallbacks = {
+					resolve,
+					reject,
+				};
+			} else {
+				const inputValue = this.#inputQueue.shift();
+				this.out(inputValue);
+				resolve(inputValue);
+				this.#dispatchEvent('input', inputValue);
+
+				this.#removeFirstTmpLine();
+			}
 		});
 	}
 
@@ -172,6 +223,8 @@ class ObsiCLI extends HTMLElement {
 	close(message) {
 		const msg =
 			message == undefined || message == null ? '\nObsiCLI was closed correctly.' : message;
+
+		this.#moveTmpLinesToBottom();
 
 		this.out(msg);
 		this.#inputElement.setAttribute('disabled', 'disabled');

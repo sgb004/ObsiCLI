@@ -83,6 +83,7 @@ class ObsiCLI extends HTMLElement {
 	}
 
 	#handleInputInput(event) {
+		event.stopPropagation();
 		this.#resizeTextarea(event.target.value);
 	}
 

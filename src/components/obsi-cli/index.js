@@ -101,15 +101,15 @@ class ObsiCLI extends HTMLElement {
 	}
 
 	#enterInput() {
-		const input = this.#inputElement.value;
+		const inputs = this.#inputElement.value;
 
-		this.#addInputsToInputQueue(input);
+		this.#addInputsToInputQueue(inputs);
 
 		const firstInput = this.#inputQueue.shift();
 
-		this.#multiout(input);
+		this.#multiout(inputs);
 		this.#inCallbacks.resolve(firstInput);
-		this.#dispatchEvent('input', firstInput);
+		this.#dispatchEvent('input', { firstInput, inputs });
 		this.#inputElement.value = '';
 		this.#inputElement.setAttribute('rows', 1);
 
@@ -200,10 +200,10 @@ class ObsiCLI extends HTMLElement {
 					reject,
 				};
 			} else {
-				const inputValue = this.#inputQueue.shift();
-				this.out(inputValue);
-				resolve(inputValue);
-				this.#dispatchEvent('input', inputValue);
+				const firstInput = this.#inputQueue.shift();
+				this.out(firstInput);
+				resolve(firstInput);
+				this.#dispatchEvent('input', { firstInput, inputs: firstInput });
 
 				this.#removeFirstTmpLine();
 			}

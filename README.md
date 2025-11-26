@@ -1,6 +1,6 @@
 # ObsiCLI
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/sgb004/ObsiCLI)
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)](https://github.com/sgb004/ObsiCLI)
 [![Author](https://img.shields.io/badge/author-sgb004-green.svg)](https://sgb004.com)
 
 A command line simulator for JavaScript programs as programming challenges. This simulator is intended as a means to print output and input.

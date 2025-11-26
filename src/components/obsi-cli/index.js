@@ -108,6 +108,7 @@ class ObsiCLI extends HTMLElement {
 	#resizeTextarea(value) {
 		const breakLines = (value.match(/\r\n|\r|\n/g) || []).length;
 		this.#inputElement.setAttribute('rows', breakLines + 1);
+		this.scrollTo(0, this.scrollHeight);
 	}
 
 	#addInputsToInputQueue(input) {

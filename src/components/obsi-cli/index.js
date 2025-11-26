@@ -73,7 +73,16 @@ class ObsiCLI extends HTMLElement {
 		if (event.key === 'Enter') {
 			event.preventDefault();
 
-			this.#enterInput();
+			if (event.ctrlKey) {
+				const value = `${event.target.value}\n`;
+				const length = value.length;
+
+				event.target.value = value;
+				this.#resizeTextarea(value);
+				event.target.setSelectionRange(length, length);
+			} else {
+				this.#enterInput();
+			}
 		}
 	}
 

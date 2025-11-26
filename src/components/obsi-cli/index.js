@@ -74,12 +74,7 @@ class ObsiCLI extends HTMLElement {
 			event.preventDefault();
 
 			if (event.ctrlKey) {
-				const value = `${event.target.value}\n`;
-				const length = value.length;
-
-				event.target.value = value;
-				this.#resizeTextarea(value);
-				event.target.setSelectionRange(length, length);
+				this.#addLineBreak();
 			} else {
 				this.#enterInput();
 			}
@@ -94,6 +89,20 @@ class ObsiCLI extends HTMLElement {
 	#handleInputInput(event) {
 		event.stopPropagation();
 		this.#resizeTextarea(event.target.value);
+	}
+
+	#addLineBreak() {
+		let value = this.#inputElement.value;
+		let posicionCursor = this.#inputElement.selectionStart;
+		const start = value.substring(0, posicionCursor);
+		const end = value.substring(posicionCursor, value.length);
+
+		value = `${start}\n${end}`;
+		posicionCursor++;
+
+		this.#inputElement.value = value;
+		this.#resizeTextarea(value);
+		this.#inputElement.setSelectionRange(posicionCursor, posicionCursor);
 	}
 
 	#resizeTextarea(value) {

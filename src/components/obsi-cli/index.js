@@ -8,6 +8,8 @@
 class ObsiCLI extends HTMLElement {
 	#outputElement;
 	#inputElement;
+	#sendButton;
+	#sendButtonIsVisible = false;
 	#inputQueue = [];
 	#inCallbacks;
 
@@ -20,7 +22,10 @@ class ObsiCLI extends HTMLElement {
 			<div class="screen">
 				<div class="output">
 				</div>
-				<textarea class="input" rows="1"></textarea>
+				<div class="input-container">
+					<textarea class="input" rows="1"></textarea>
+					<button type="button" class="send"></button>
+				</div>
 			</div>
 		`;
 
@@ -30,6 +35,7 @@ class ObsiCLI extends HTMLElement {
 			reject: () => {},
 		};
 		this.#inputElement = this.querySelector('.input');
+		this.#sendButton = this.querySelector('.send');
 		this.#addListeners();
 
 		requestAnimationFrame(() => {
@@ -39,10 +45,13 @@ class ObsiCLI extends HTMLElement {
 
 	#addListeners() {
 		this.addEventListener('click', this.#handleClick.bind(this));
+		this.addEventListener('dblclick', this.#toggleSendButton.bind(this));
 
 		this.#inputElement.addEventListener('keydown', this.#handleInputKeydown.bind(this));
 		this.#inputElement.addEventListener('paste', this.#handleInputPaste.bind(this));
 		this.#inputElement.addEventListener('input', this.#handleInputInput.bind(this));
+		this.#sendButton.addEventListener('click', this.#handleSendClick.bind(this));
+		this.#sendButton.addEventListener('dblclick', (event) => event.stopPropagation());
 	}
 
 	#dispatchEvent(name, detail = {}) {
@@ -73,7 +82,9 @@ class ObsiCLI extends HTMLElement {
 		if (event.key === 'Enter') {
 			event.preventDefault();
 
-			if (event.ctrlKey) {
+			if (event.ctrlKey && event.shiftKey) {
+				this.#toggleSendButton();
+			} else if (event.ctrlKey || event.shiftKey || this.#sendButtonIsVisible) {
 				this.#addLineBreak();
 			} else {
 				this.#enterInput();
@@ -89,6 +100,15 @@ class ObsiCLI extends HTMLElement {
 	#handleInputInput(event) {
 		event.stopPropagation();
 		this.#resizeTextarea(event.target.value);
+	}
+
+	#handleSendClick(event) {
+		event.preventDefault();
+		this.#enterInput();
+	}
+
+	#toggleSendButton() {
+		this.#sendButtonIsVisible = this.#sendButton.classList.toggle('visible');
 	}
 
 	#addLineBreak() {

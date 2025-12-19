@@ -29,6 +29,51 @@ obsi-cli {
 		padding: 4px;
 	}
 
+	.input-container {
+		display: flex;
+		gap: 2px;
+
+		.send {
+			display: none;
+			appearance: none;
+			margin-top: auto;
+			height: 100%;
+			width: min-content;
+			max-height: 17px;
+			aspect-ratio: 1 / 1;
+			padding: 2px;
+			border: none;
+			border-radius: 2px;
+			cursor: pointer;
+			font-family: var(--font-family);
+			font-size: var(--font-size);
+			background-color: transparent;
+			background-image: url('data:image/svg+xml,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><g fill="%23fff"><path d="M.774 11.093a.774.774 0 01.774.775v2.325c0 .143.116.259.258.259h12.388a.258.258 0 00.258-.259v-2.325a.774.774 0 011.548 0v2.325A1.806 1.807 0 0114.194 16H1.806A1.806 1.807 0 010 14.193v-2.325a.774.774 0 01.774-.775"/><path d="M8.209 1.372a.774.774 0 01.774.775v8.347a.774.774 0 01-1.549 0V2.148a.774.774 0 01.775-.775"/><path d="M7.668.22a.774.774 0 011.081 0l3.452 3.372a.774.774 0 01-1.082 1.107L8.21 1.856 5.298 4.7a.774.774 0 11-1.082-1.107z"/></g></svg>');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 90% auto;
+			outline: 1px solid transparent;
+			outline-offset: 2px;
+			transition: all 0.1s ease-in-out;
+
+			&:focus {
+				outline-color: var(--text-color);
+			}
+
+			&:hover {
+				background-size: 100% auto;
+			}
+
+			&:active {
+				background-size: 80% auto;
+			}
+
+			&.visible {
+				display: block;
+			}
+		}
+	}
+
 	.output {
 		margin-top: auto;
 	}
